@@ -46,8 +46,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="StringCal.cs" />
-    <Compile Include="StringCalculatorTests.cs" />
+    <Compile Include="StringCalculator.cs" />
+    <Compile Include="StringCaluclatorTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
