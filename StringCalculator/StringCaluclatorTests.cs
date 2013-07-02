@@ -1,92 +1,90 @@
-﻿using NUnit.Framework;
+﻿using System.Collections.Generic;
+using System.Text;
+using System.Threading.Tasks;
+using NUnit.Framework;
 
-namespace StringCalculator
+namespace StringCalculator2013_07_02
 {
-    public class StringCalculatorTests
+    public class StringCaluclatorTests
     {
         [Test]
-        public void AddZero()
+        public void AddEmptyString()
         {
-            var sc = new StringCal();
-            var sum=sc.Add("");
-
-            Assert.AreEqual(0, sum);
+            var calc = new StringCalculator();
+            var result = calc.Add(null);
+            Assert.AreEqual(0, result);
         }
         
         [Test]
-        public void AddOne()
+        public void AddOneNumber()
         {
-            var sc = new StringCal();
-            var sum=sc.Add("1");
-
-            Assert.AreEqual(1, sum);
+            var calc = new StringCalculator();
+            var result = calc.Add("5");
+            Assert.AreEqual(5, result);
         }
         
         [Test]
-        public void AddTwoDigits()
+        public void AddTwoNumbers()
         {
-            var sc = new StringCal();
-            var sum=sc.Add("1,2");
+            var calc = new StringCalculator();
+            var result = calc.Add("5,2");
+            Assert.AreEqual(7, result);
+        }
 
-            Assert.AreEqual(3, sum);
+        [Test]
+        public void AddThreeNumbers()
+        {
+            var calc = new StringCalculator();
+            var result = calc.Add("5,2,3");
+            Assert.AreEqual(10, result);
+        }
+
+        [Test]
+        public void AddThreeNumbersWithDifferentSeperators()
+        {
+            var calc = new StringCalculator();
+            var result = calc.Add("5,2\n3");
+            Assert.AreEqual(10, result);
         }
         
         [Test]
-        public void AddFourDigits()
+        public void AddThreeNumbersWithCustomizedSeperator()
         {
-            var sc = new StringCal();
-            var sum=sc.Add("1,2,3,5");
-
-            Assert.AreEqual(11, sum);
+            var calc = new StringCalculator();
+            var result = calc.Add("//;\n5;2\n3");
+            Assert.AreEqual(10, result);
         }
         
         [Test]
-        public void AddFourDigitsWithLineBreak()
+        public void AddThreeNumbersWithCustomizedMulticharseperator()
         {
-            var sc = new StringCal();
-            var sum=sc.Add("1,2,3\n5");
-
-            Assert.AreEqual(11, sum);
+            var calc = new StringCalculator();
+            var result = calc.Add("//#+-\n5#+-2#+-3#+-20");
+            Assert.AreEqual(30, result);
         }
         
         [Test]
-        public void AddFourDigitsWithLineBreakFirstLineIsTheSpeperator()
+        public void IgnoreNUmbersBigger1000()
         {
-            var sc = new StringCal();
-            var sum=sc.Add("//X\n1X2X3X5");
-
-            Assert.AreEqual(11, sum);
-        }
-
-        [Test]
-        public void AddFourDigitsWithLineBreakFirstLineIsTheSpeperatorWithMultipleChars()
-        {
-            var sc = new StringCal();
-            var sum=sc.Add("//XXX\n1XXX2XXX3XXX5");
-
-            Assert.AreEqual(11, sum);
+            var calc = new StringCalculator();
+            var result = calc.Add("//#+-\n5#+-2#+-3#+-20#+-1002");
+            Assert.AreEqual(30, result);
         }
         
         [Test]
-        public void AddFourDigitsWithLineBreakFirstLineIsTheSpeperatorWithMultipleCharsWithMultipleSeperators()
+        public void AllowMultipleCustomDelimiters()
         {
-            var sc = new StringCal();
-            var sum=sc.Add("//XXX,yyy\n1XXX2yyy3XXX5");
-
-            Assert.AreEqual(11, sum);
+            var calc = new StringCalculator();
+            var result = calc.Add("//#+-,ABC,XYZ\n5#+-2ABC3#+-20XYZ1002");
+            Assert.AreEqual(30, result);
         }
         
         [Test]
-        public void IgnoreNumbersBiggerThanThousand()
+        public void IgnoreWronIntegers()
         {
-            var sc = new StringCal();
-            var sum=sc.Add("1,2,1000");
-
-            Assert.AreEqual(3, sum);
+            var calc = new StringCalculator();
+            var result = calc.Add("//#+-,ABC,XYZ\n5#+-2.2ABC3#+-20XYZ1002");
+            Assert.AreEqual(28, result);
         }
-
-
-
-
     }
 }
