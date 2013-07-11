@@ -33,7 +33,8 @@
     <Reference Include="dff.Extensions">
       <HintPath>..\packages\dff.Extensions.1.0.11\lib\dff.Extensions.dll</HintPath>
     </Reference>
-    <Reference Include="nunit.framework">
+    <Reference Include="nunit.framework, Version=2.6.2.12296, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\NUnit.2.6.2\lib\nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="System" />
@@ -46,8 +47,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="StringCalculator.cs" />
-    <Compile Include="StringCaluclatorTests.cs" />
+    <Compile Include="StringCalculatorTests.cs" />
+    <Compile Include="StringClac.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
